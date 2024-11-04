@@ -1,0 +1,6 @@
+entity User {
+    id: int immutable
+    name: String
+    email: String @Email
+    age: int optional
+}
