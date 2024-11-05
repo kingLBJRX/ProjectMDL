@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MDLCodeGenProject/MDLCodeGenProject.iml" filepath="$PROJECT_DIR$/MDLCodeGenProject/MDLCodeGenProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/projectMDL.iml" filepath="$PROJECT_DIR$/.idea/projectMDL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MDLCodeGenProject/test/test.iml" filepath="$PROJECT_DIR$/MDLCodeGenProject/test/test.iml" />
     </modules>
   </component>
 </project>

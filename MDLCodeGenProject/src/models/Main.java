@@ -1,12 +1,12 @@
-import models.Entity;
+package models;
 
 import java.io.File;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        File mdlFolder = new File("D:\\Repos\\ProjectMDL\\MDLCodeGenProject\\MDLs");
-        File targetFolder = new File("D:\\Repos\\ProjectMDL\\\\target");
+        File mdlFolder = new File("MDLCodeGenProject/MDLs");
+        File targetFolder = new File("MDLCodeGenProject/src/generatedClass");
 
         MDLParser parser = new MDLParser();
         JavaClassGenerator generator = new JavaClassGenerator();
