@@ -1,3 +1,5 @@
+package models;
+
 import models.Entity;
 import models.Field;
 
