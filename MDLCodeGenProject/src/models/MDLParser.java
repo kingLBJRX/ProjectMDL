@@ -1,8 +1,5 @@
 package models;
 
-import models.Entity;
-import models.Field;
-
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -11,7 +8,7 @@ import java.util.regex.*;
 public class MDLParser {
 
     private static final Pattern ENTITY_PATTERN = Pattern.compile("entity (\\w+) \\{");
-    private static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+): (\\w+)(.*)");
+    private static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+): (\\w+(?:<[^>]+>)?)(?:\\s+(.*))?");
 
     public List<Entity> parse(File mdlFile) throws IOException {
         List<Entity> entities = new ArrayList<>();
@@ -31,7 +28,7 @@ public class MDLParser {
                 } else if (fieldMatcher.matches() && currentEntity != null) {
                     String name = fieldMatcher.group(1);
                     String type = fieldMatcher.group(2);
-                    String properties = fieldMatcher.group(3);
+                    String properties = fieldMatcher.group(3) != null ? fieldMatcher.group(3) : "";
 
                     boolean isImmutable = properties.contains("immutable");
                     boolean isOptional = properties.contains("optional");

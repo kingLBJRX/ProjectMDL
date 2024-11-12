@@ -1,8 +1,5 @@
 package models;
 
-import models.Entity;
-import models.Field;
-
 import java.io.*;
 import java.nio.file.*;
 import java.util.List;
@@ -28,7 +25,11 @@ public class JavaClassGenerator {
                     if (field.getAnnotation() != null) {
                         writer.write("    " + field.getAnnotation() + "\n");
                     }
-                    writer.write("    private " + field.getType() + " " + field.getName() + ";\n");
+                    String prefix = "    private ";
+                    if (field.isImmutable()) {
+                        prefix = "    private final ";
+                    }
+                    writer.write(prefix + field.getType() + " " + field.getName() + ";\n");
                     if (field.isOptional()) {
                         writer.write("    private boolean has" + capitalize(field.getName()) + " = false;\n");
                     }
@@ -96,6 +97,18 @@ public class JavaClassGenerator {
                     writer.write("    public " + field.getType() + " get" + capitalized + "() {\n");
                     writer.write("        return " + field.getName() + ";\n");
                     writer.write("    }\n\n");
+                }
+
+                // Setter methods for each non-immutable field in the main class
+                for (Field field : entity.getFields()) {
+                    String capitalized = capitalize(field.getName());
+
+                    if (!field.isImmutable()){
+                        // Setter
+                        writer.write("    public void set" + capitalized + "(" + field.getType() + " " + field.getName() + ") {\n");
+                        writer.write("        this." + field.getName() + " = " + field.getName() + ";\n");
+                        writer.write("    }\n\n");
+                    }
                 }
 
                 writer.write("}\n");  // End of Entity class
